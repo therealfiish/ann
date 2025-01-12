@@ -8,91 +8,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <sstream>
-// class TrainingData
-// {
-// public:
-//     TrainingData(const std::string filename);
-//     bool isEof(void)
-//     {
-//         return m_trainingDataFile.eof();
-//     }
-//     void getTopology(std::vector<unsigned> &topology);
-//
-//     // Returns the number of input values read from the file:
-//     unsigned getNextInputs(std::vector<double> &inputVals);
-//     unsigned getTargetOutputs(std::vector<double> &targetOutputVals);
-//
-// private:
-//     std::ifstream m_trainingDataFile;
-// };
-//
-// void TrainingData::getTopology(std::vector<unsigned> &topology)
-// {
-//     std::string line;
-//     std::string label;
-//
-//     getline(m_trainingDataFile, line);
-//     std::stringstream ss(line);
-//     ss >> label;
-//     if(this->isEof() || label.compare("topology:") != 0)
-//     {
-//         abort();
-//     }
-//
-//     while(!ss.eof())
-//     {
-//         unsigned n;
-//         ss >> n;
-//         topology.push_back(n);
-//     }
-//     return;
-// }
-//
-// TrainingData::TrainingData(const std::string filename)
-// {
-//     m_trainingDataFile.open(filename.c_str());
-// }
-//
-//
-// unsigned TrainingData::getNextInputs(std::vector<double> &inputVals)
-// {
-//     inputVals.clear();
-//
-//     std::string line;
-//     getline(m_trainingDataFile, line);
-//     std::stringstream ss(line);
-//
-//     std::string label;
-//     ss >> label;
-//     if (label.compare("in:") == 0) {
-//         double oneValue;
-//         while (ss >> oneValue) {
-//             inputVals.push_back(oneValue);
-//         }
-//     }
-//
-//     return inputVals.size();
-// }
-//
-// unsigned TrainingData::getTargetOutputs(std::vector<double> &targetOutputVals)
-// {
-//     targetOutputVals.clear();
-//
-//     std::string line;
-//     getline(m_trainingDataFile, line);
-//     std::stringstream ss(line);
-//
-//     std::string label;
-//     ss>> label;
-//     if (label.compare("out:") == 0) {
-//         double oneValue;
-//         while (ss >> oneValue) {
-//             targetOutputVals.push_back(oneValue);
-//         }
-//     }
-//
-//     return targetOutputVals.size();
-// }
+
 class Neuron;
 typedef std::vector<Neuron> Layer;
 
@@ -123,7 +39,6 @@ private:
     static double alpha; // 0.0 -> n, multiplier of last weight chance (momentum)
     static double eta; // 0.0 -> 1.0, overall net training rate
 };
-
 
 double Neuron::eta = 0.2; //overall net learning rate
 double Neuron::alpha = 0.7; //momentum - multiplier of last delWeight (0.0 -> n)
@@ -328,7 +243,7 @@ void showVectorVals(std::string label, std::vector<double> &v, std::ofstream &ou
 
 int main() {
     std::ofstream outFile("out.txt", std::ios::out);
-    std::ifstream file("XORs.csv");
+    std::ifstream file("ANDs.csv");
     std::string line;
     std::vector<std::vector<double>> inputs, outputs;
 
